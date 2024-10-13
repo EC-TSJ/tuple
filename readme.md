@@ -1,4 +1,4 @@
-# Set
+# **Core**
 
 [![Home](https://godoc.org/github.com/gookit/event?status.svg)](file:///D:/EC-TSJ/Documents/CODE/SOURCE/Go/pkg/lib/cli)
 [![Build Status](https://travis-ci.org/gookit/event.svg?branch=master)](https://travis-ci.org/)
@@ -7,131 +7,111 @@
 
 > **[EN README](README.md)**
 
-Tuple es una librería para manipular la DataStructure tuple.
+Es una librería para gestionar tuples.
 
 ## GoDoc
 
 - [godoc for github](https://godoc.org/github.com/)
 
 ## Funciones Principales
---- 
 
+Los tipos principales ( y de carácter subyacente ) son:
 
-Tiene los objetos siguientes:
-- Type `struct` ***Element***, para hacer las definiciones.
+- _**TupleV1[A]**_
+- _**TupleV2[A, B]**_
+- _**TupleV3[A, B, C]**_
+- _**TupleV4[A, B, C, D]**_
+- _**TupleV5[A, B, C, D, E]**_
+- _**TupleV6[A, B, C; D, E, F]**_
+- _**TupleV7[A, B, C, D, E, F, G]**_
+- _**TupleV8[A, B, C, D, E, F, G, I]**_
+- _**TupleV9[A, B, C, D, E, F, G, I, J]**_
 
-- Type `[]Element` ***Tuple*** con los métodos de ITuple.
+Tipos Principales y de carácter genérico:
 
-- Type `ìnterface` ***ITuple***, con métodos:
+_**TupleConv[A, B]**_ con sus métodos:
 
-	- *`Insert(int, ...T)	IsEmpty() bool`*
-	- *`Size() int`*
-	- *`Add(...T)`*
-	- *`Remove(int) T`*
-	- *`Clone() ITuple`*
-	- *`ToSlice(...int) []Tuple`*
-	- *`Set(int, T)`*
-	- *`Get(int) T`*
-	- *`String() string`*
-	- *`Reverse()`*
-	- *`Pop(pop) T`*
-	- *`Count(T) int`*
-	- *`Index(T) int`*
-	- *`Sort(order)`*
-	- *`Max() T`*
-	- *`Min() T`*
-	- *`IsEmpty() bool`*
+- _`New(T, P) *TupleC[T, P]`_
+- _`Convert() P`_
 
+_**Tuple[T]**_, El tipo genérico con sus métodos:
 
-- Funciones:
+- _`Get(pos int) any`_
+- _`Count(count any) int`_
+- _`Filter(fn func(...any) []any) []any`_
+- _`ForEach(fn func(any))`_
+- _`Index(x any) (int, string)`_
+- _`Length() int`_
+- _`Max() any`_
+- _`Min() any`_
+- _`ToSlice() []any`_
+- _`UnPack() T`_
+- _`Ptr() any`_
 
-	- *`NewTuple(...Item) ITuple`*
-	- *`Len(t Tuple) int `*
-	- *`Max(t Tuple) (max T)`* 
-	- *`Min(t Tuple) (min T) `*
+Y funciones:
 
+- _`Get[T any](obj any, pos int) T`_
+- _`Count[T any](obj any, x T) (count int)`_
+- _`Index[T any](obj any, x T) (idx int, field string)`_
+- _`Length(obj any) int`_
+- _`Max[T any](obj any) (t T)`_
+- _`Min[T any](obj any) (t T)`_
+- _`ToSlice(obj any) (arr []any)`_
+- _`Convert[TOrig any, TConv any](orig TOrig) (to TConv)`_
+- _`Filter[T any](obj any, fn func(...any) []T) []T`_
+- _`ForEach(obj any, fn func(any))`_
+- _`UnPack[T any](p *Tuple[T]) T`_
 
--Enumeraciones:
+## Ejemplo
 
-- ***pop***:
-
-  - *`POP_LEFT`*
-  -	*`POP_RIGHT`*
-
-- ***order***:
-
-	- *`ASCENDANT`*
-	- *`DESCENDANT`*
-
-
+```go
+```
 
 ## Ejemplos
+
 ```go
-
- 	-ejemplo 1.-
-
-	teb := tpl.NewTuple([]interface{}{9, 8, 61, 7, "jesus", 5, 56, "lopez", 32, 15})
-	teb.Sort(tpl.ASCENDANT)
-	zm := teb.Copy()
-	teb.Set(teb.Len()-1, 25)
-	teb.Set(125, 135)
-	teb.Set(3, 25)
-	teb.Remove(5)
-	teb.InsertItems(5, 53, "venticinco", 79)
-	teb.AddItems(52, "venticuatro", 78)
-	teb.Add(teb)
-	scb := teb.Get(131)
-	sal := teb.String()
-	teb.Reverse()
-	zl := teb.ToSlice(3, 8)
-	zk := teb.ToSlice()
-	left := teb.Pop(tpl.POP_LEFT)
-	right := teb.Pop(tpl.POP_RIGHT)
-	za := teb.Count(25)
-	zs := teb.Index(11)
-	zd := teb.Index(25)
-	tuple := tpl.NewTuple([]interface{}{9, 8, 7, 6, 5, 56, 21, 32, 15})
-	size := tpl.Len(tuple)
-	max := tpl.Max(tuple)
-	min := tpl.Min(tuple)
-
-	fmt.Println(teb, scb, sal, zl, zk, zm, left, right, za, zs, zd)
-	fmt.Println(tuple, size, max, min)
-
-	-ejemplo 2.-
-
-	var listA tuple.Tuple
-	listA = []Tuple{{D: "unp"}, {D: 4}, {D: 56}, {D: "kkk"}}
-	lis := Tuple([]Tuple{{D: "unp"}, {D: 4}, {D: 56}, {D: "kkk"}})
-	list := NewTuple([]Tuple{{D: "unp"}, {D: 4}, {D: 56}, {D: "kkk"}})
-	list.Add("dos", "tres", 9393, 450459403)
-	salva := listA.Get(2)
-	listA.Set(2, "gilipo")
-	calling := list.String()
-	list.Reverse()
-	pop := list.Pop(tuple.POP_LEFT)
-	popA := list.Pop(tuple.POP_RIGHT)
-	list.Sort(tuple.ASCENDANT)
-	listo := listA.Clone()
-	golo := listA.ToSlice()
-	golo2 := lis.ToSlice(2, 3)
-	sqs := listA.Remove(3)
-	list.Insert(2, []tuple.Tuple{{"uno"}, {"dos"}, {"tres"}, {"cuatro"}, {"cinco"}, {"seis"}, {"siete"}})
-	vario := tuple.Len([]tuple.Tuple{{"uno"}, {"dos"}, {"tres"}, {"cuatro"}, {"cinco"}, {"seis"}, {"siete"}})
-	max := tuple.Max([]tuple.Tuple{{"uno"}, {"dos"}, {"tres"}, {"cuatro"}, {"cinco"}, {"seis"}, {"siete"}})
-	min := tuple.Min([]tuple.Tuple{{"uno"}, {"dos"}, {"tres"}, {"cuatro"}, {"cinco"}, {"seis"}, {"siete"}})
-	fmt.Println(vario, list, listA, salva, calling, lis, pop, popA, listo, golo, golo2, sqs, max, min)
-
-
+func main() {
+	a := (&Tuple[TupleV6[string, int, float64, string, int, int]]{}).New(TupleV6[string, int, float64, string, int, int]{"joder", 25, 25.64, "value", 62, 12})
+	//a := &Tuple[TupleV6[string, int, float64, string, int, int]]{TupleV6[string, int, float64, string, int, int]{"joder", 25, 25.64, "value", 62, 12}}
+	//flip := UnPack(a)
+	zzz1 := Convert[TupleV3[int, string, float64], TupleV1[int]](TupleV3[int, string, float64]{25, "jeje", 56.12})
+	zzz2 := Convert[TupleV3[int, string, float64], TupleV6[int, string, float64, int, float64, string]](TupleV3[int, string, float64]{25, "jeje", 56.12})
+	zzz2.F = "caballo"
+	zar := (&TupleConv[TupleV3[int, string, float64], TupleV1[int]]{}).New(TupleV3[int, string, float64]{13, "XO", 61.10}, TupleV1[int]{})
+	//zar := TupleV[TupleV3[int, string, float64], TupleV1[int]]{TupleV3[int, string, float64]{13, "XO", 61.10}, TupleV1[int]{}}
+	zzzf := zar.Convert()
+	zare := TupleConv[TupleV3[int, string, float64], TupleV7[int, string, float64, string, int, int, float64]]{TupleV3[int, string, float64]{13, "XO", 61.10}, TupleV7[int, string, float64, string, int, int, float64]{}}
+	zzzg := zare.Convert()
+	zflip := a.UnPack()
+	fmt.Println(zflip.C, zflip.D, zzz1, zzz2, zzzf, zzzg)
+	fmt.Println(a.ToSlice())
+	value := a.Get(2)
+	zz1 := a.Length()
+	fmt.Println(value)
+	blb := a.Count(25.64)
+	println(blb, zz1)
+	b := &Tuple[TupleV3[int, string, int]]{TupleV3[int, string, int]{15, "tocomocho", 61}, nil}
+	zz := b.Length()
+	zx := b.Max()
+	zz10 := Max[string](b.Ptr())
+	zd := b.Min()
+	zz11 := Min[int](b.Ptr())
+	z := a.Length()
+	z1 := a.Count(25)
+	z2, z3 := a.Index(25.64)
+	xfg := reflect.ValueOf(z2).Kind()
+	z2, z3 = a.Index("value")
+	zal := a.Max()
+	zas := a.Min()
+	fmt.Println(zz10, zz11, xfg, a, zas, zal, z2, z3, z1, z, zz, zx, zd)
+}
 ```
+
 ## Notas
-
-
-
-
 
 <!-- - [gookit/ini](https://github.com/gookit/ini) INI配置读取管理，支持多文件加载，数据覆盖合并, 解析ENV变量, 解析变量引用
 -->
+
 ## LICENSE
 
 **[MIT](LICENSE)**
